@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './component/App';
-import firebase from "./firebase";
+import { authService } from './firebase';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-console.log(firebase);
+console.log(authService);
 root.render(
+
   <App />
 );
 
