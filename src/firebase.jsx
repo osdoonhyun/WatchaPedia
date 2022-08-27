@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-// import * as firebase from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -12,8 +11,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_MESSAGIN_ID,
   appId: process.env.REACT_APP_APP_ID,
 };
-
-// export default firebase.initializeApp(firebaseConfig);
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
