@@ -18,7 +18,7 @@ const SearchBar = () => {
       )
     ).json();
     // console.log(json);
-    // console.log(json.Data[0].Result);
+    console.log(json.Data[0].Result);
 
     const moviesInfoList = json.Data[0].Result.map((x) => {
       let rectifyTitle = x.title;
@@ -30,14 +30,19 @@ const SearchBar = () => {
       return {
         movieSeq: x.movieSeq,
         title: rectifyTitle,
-        posterUrl: x.posters.split('|')[0],
-        stilUrl: x.stlls.split('|')[0],
+        titleEng: x.titleEng,
+        actorAndProd: x.staffs.staff,
+        runtime: x.runtime,
+        rating: x.rating,
+        plot: x.plots.plot[0].plotText,
+        vods: x.vods.vod,
+        posterUrls: x.posters.split('|'),
+        stilUrls: x.stlls.split('|'),
         prodYear: x.prodYear,
         nation: x.nation,
         genre: x.genre,
       };
     });
-
     Navigate('./SearchResult', { state: moviesInfoList });
   };
 
