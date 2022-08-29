@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import './Header.css';
 // import SearchIcon from "@material-ui/icons/Search"
 // import AccountIcon from "@material-ui/icons/AccountCircle"
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SearchBar from './searchBar';
 
 function Header() {
@@ -34,8 +34,8 @@ function Header() {
             </div>
           </div>
           {/* TODO: navigate 사용해서 페이지 이동 */}
-          <Link to='./Login'>Login</Link>
-          <button onClick={onLoginClick}>{loggedIn ? 'Login' : '평가하기'}</button>
+          <button onClick={onLoginClick}>{loggedIn ? '평가하기' : 'Login'}</button>
+          <button onClick={()=>Navigate('/signUp')}>{loggedIn ? '프로필' :  'SignUp'}</button>
           {/* <button onClick={()=>Navigate('/SignUp')}>{loggedIn ? "SignUp" : <AccountIcon className="header_accountIcon"/>}</button> */}
         </div>
       </div>
