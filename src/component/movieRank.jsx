@@ -1,21 +1,21 @@
 import React, { useState,useEffect } from 'react';
 import SearchMovie from './searchMovie'
 
-function movieRank() {
+function MovieRank() {
   const [movies, setMovies]=useState([]);
 
   //영진위 영화정보 가져오기
   const getMovies = async () => {
     const json = await(
-      await fetch(`http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=9674dd7ff57f3049d68c7349e58025ba&targetDt=20220827&itemPerPage=10`
+      await fetch(`http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=9674dd7ff57f3049d68c7349e58025ba&targetDt=20220827&itemPerPage=10`
       )
     ).json();
-    setMovies(json['boxOfficeResult']['dailyBoxOfficeList']);
+    setMovies(json['boxOfficeResult']['dailyBoxOfficeList']);  
   }
-
   useEffect(()=>{
     getMovies();
   },[]);
+
 
 
   const moviesList = movies.map((movie) => {
@@ -25,7 +25,7 @@ function movieRank() {
       openDt: movie.openDt.slice(0,4),
       title: movie.movieNm,
       salesShare: movie.salesShare+'%',
-      audiAcc: (movie.audiAcc/10000).toFixed()+'만',
+      audiAcc: (movie.audiAcc/10000).toFixed()+'만', 
     };
   });
 
@@ -33,9 +33,10 @@ function movieRank() {
     <div className="home">
       {moviesList.map((movie) => (
         <div key={movie.rnum}>
+          <div>
+            {movie.rank}위
+          </div>
           <SearchMovie title={movie.title} openDt={movie.openDt}/>
-          <div>이미지</div>
-          {movie.rank}
           {movie.title}
           {movie.openDt}
           <div>
@@ -48,4 +49,4 @@ function movieRank() {
   );
 }
 
-export default movieRank;
+export default MovieRank;
