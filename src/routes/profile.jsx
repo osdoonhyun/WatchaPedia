@@ -14,19 +14,16 @@ function Profile() {
 
   
   const onProfileEditClick = () => {
-    Navigate('./ProfileEdit');
-  };
-  const onMovieClick = () => {
-    Navigate('./MovieStorage');
+    Navigate('/ProfileEdit');
   };
   const onEvaluationClick = () => {
-    Navigate('./EvaluationStorage');
+    Navigate('/ProfileEvaluation');
   };
   const onCommentClick = () => {
-    Navigate('./CommentStorage');
+    Navigate('/ProfileComment');
   };
   const onCollectionClick = () => {
-    Navigate('./CollectionStorage');
+    Navigate('/ProfileCollection');
   };
 
   return(
@@ -58,7 +55,11 @@ function Profile() {
           컬렉션
         </div>
       </div>
-      <div className='profile_storage'>
+      <div className='profile_preference_analysis'
+        >
+        취향분석
+      </div>
+      {/* <div className='profile_storage'>
         <p>보관함</p>
         <div 
           onClick={onMovieClick} 
@@ -78,8 +79,8 @@ function Profile() {
         <div className='profile_storage_Webtoon'>
           <div>웹툰 아이콘</div>
           <div>웹툰</div>
-        </div>
-      </div>
+        </div> }
+      </div> */}
     </div>
   )
 }

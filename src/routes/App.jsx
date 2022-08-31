@@ -7,6 +7,10 @@ import Login from './login';
 import SignUp from './signUp';
 import MovieDetail from './movieDetail';  
 import Profile from './profile';
+import ProfileEdit from './profileEdit';
+import ProfileComment from './profileCommentsx';
+import ProfileEvaluation from './profileEvaluation';
+import ProfileCollection from './profileCollection';
 
 function App() {
   return (
@@ -26,8 +30,11 @@ function App() {
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/SearchResult' element={<SearchResult />} />
           <Route path='/MovieDetail' element={<MovieDetail />} />
-
           <Route path='/profile' element={<Profile />} />
+          <Route path='/profileEdit' element={<ProfileEdit />} />
+          <Route path='/ProfileEvaluation' element={<ProfileEvaluation />} />
+          <Route path='/ProfileComment' element={<ProfileComment />} />
+          <Route path='/ProfileCollection' element={<ProfileCollection />} />
         </Routes>
       </Router>
     </div>
