@@ -22,8 +22,8 @@ const SearchBar = () => {
 
     const moviesInfoList = json.Data[0].Result.map((x) => {
       let rectifyTitle = x.title;
-      rectifyTitle = rectifyTitle.replace(/\!HS/g, '');
-      rectifyTitle = rectifyTitle.replace(/\!HE/g, '');
+      rectifyTitle = rectifyTitle.replace(/!HS/g, '');
+      rectifyTitle = rectifyTitle.replace(/!HE/g, '');
       rectifyTitle = rectifyTitle.replace(/^\s+|\s+$/g, '');
       rectifyTitle = rectifyTitle.replace(/ +/g, ' ');
       //g : 전역에서
