@@ -1,12 +1,15 @@
 import { authService } from '../firebase';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const GoogleLogIn = () => {
+  const Navigate = useNavigate();
+
   const onSocialClick = async () => {
     const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(authService, provider);
-    console.log(result);
+    await signInWithPopup(authService, provider);
+    Navigate('/');
   };
 
   return (
