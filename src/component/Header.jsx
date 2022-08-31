@@ -8,9 +8,25 @@ import SearchBar from './searchBar';
 function Header() {
   const Navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
+  // const {state} = useLocation();
+  // const anyName = useLocation().state; 
+
+  // if(anyName){ //로그인 상태 확인
+  // }
   const onLoginClick = () => {
-    Navigate('./Login');
+    if(loggedIn){ 
+      Navigate('./Login');
+    } else {
+      Navigate('./profile');
+    }
     setLoggedIn((loggedIn) => !loggedIn);
+  };
+  const onSignUpClick = () => {
+    if(loggedIn){ 
+      Navigate('./SignUp');
+    } else {
+      Navigate('./profile');
+    }
   };
 
   return (
@@ -33,9 +49,10 @@ function Header() {
               {/* <SearchIcon className="header_searchIcon"/> */}
             </div>
           </div>
+
           {/* TODO: navigate 사용해서 페이지 이동 */}
           <button onClick={onLoginClick}>{loggedIn ? '평가하기' : 'Login'}</button>
-          <button onClick={()=>Navigate('/signUp')}>{loggedIn ? '프로필' :  'SignUp'}</button>
+          <button onClick={onSignUpClick}>{loggedIn ? '프로필' :  'SignUp'}</button>
           {/* <button onClick={()=>Navigate('/SignUp')}>{loggedIn ? "SignUp" : <AccountIcon className="header_accountIcon"/>}</button> */}
         </div>
       </div>
