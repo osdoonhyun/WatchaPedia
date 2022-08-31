@@ -17,7 +17,7 @@ function MovieRank() {
   },[]);
 
 
-
+  //toFixed() : 괄호 안에 숫자가 소수점 자릿수를 나타냄
   const moviesList = movies.map((movie) => {
     return {
       rnum: movie.rnum,
@@ -32,16 +32,18 @@ function MovieRank() {
   return (
     <div className="home">
       {moviesList.map((movie) => (
-        <div key={movie.rnum}>
-          <div>
-            {movie.rank}위
-          </div>
-          <SearchMovie title={movie.title} openDt={movie.openDt}/>
-          {movie.title}
-          {movie.openDt}
-          <div>
-            예매율: {movie.salesShare}
-            누적관객수: {movie.audiAcc}
+        <div key={movie.rnum} className="movie_Container">
+          <div className='movie_Box'>
+            <div>
+              {movie.rank}위
+            </div>
+            <SearchMovie title={movie.title} openDt={movie.openDt}/>
+            {/* {movie.title}
+            {movie.openDt} */}
+            <div>
+              예매율: {movie.salesShare}
+              누적관객수: {movie.audiAcc}
+            </div>
           </div>
         </div>
       ))}

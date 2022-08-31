@@ -1,10 +1,11 @@
 import React from 'react';
 import Header from '../component/Header';
-import Login from './login';
 import Home from './Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchResult from './searchResult';
+import Login from './login';
 import SignUp from './signUp';
+import Profile from './profile';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/Login' element={<Login />} />
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/SearchResult' element={<SearchResult />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </Router>
     </div>
