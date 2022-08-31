@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchResult from './searchResult';
 import Login from './login';
 import SignUp from './signUp';
+import MovieDetail from './movieDetail';  
 import Profile from './profile';
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
           <Route path='/Login' element={<Login />} />
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/SearchResult' element={<SearchResult />} />
+          <Route path='/MovieDetail' element={<MovieDetail />} />
+
           <Route path='/profile' element={<Profile />} />
         </Routes>
       </Router>
