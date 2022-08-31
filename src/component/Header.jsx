@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from './searchBar';
 import { onAuthStateChanged } from 'firebase/auth';
 import { authService } from '../firebase';
+import StarsRange from './starsRange';
 
 function Header() {
   const Navigate = useNavigate();
@@ -45,6 +46,7 @@ function Header() {
           <div className='header_option'>
             <div className='header_search'>
               <SearchBar className='header_searchInput' />
+              <StarsRange />
               {/* <SearchIcon className="header_searchIcon"/> */}
             </div>
           </div>
