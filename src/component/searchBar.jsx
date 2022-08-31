@@ -26,6 +26,7 @@ const SearchBar = () => {
       rectifyTitle = rectifyTitle.replace(/\!HE/g, '');
       rectifyTitle = rectifyTitle.replace(/^\s+|\s+$/g, '');
       rectifyTitle = rectifyTitle.replace(/ +/g, ' ');
+      //g : 전역에서
 
       return {
         movieSeq: x.movieSeq,
