@@ -7,8 +7,7 @@ function Profile() {
   const Navigate = useNavigate();
   const auth = getAuth();
   const user = auth.currentUser;
-  console.log(user);
- 
+  console.log(user); 
   console.log(user.displayName); //이름
   console.log(user.photoURL); //photo
 
