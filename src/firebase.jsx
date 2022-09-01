@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,3 +16,4 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 export const authService = getAuth(firebaseApp);
+export const dbService = getFirestore(firebaseApp); //규칙 가서 read/write 규칙 바꿔줘야 함. 기본값으로는 write 불가

@@ -6,8 +6,8 @@ import GoogleLogIn from '../component/googleLogIn';
 const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [ourUer, setOurUser] = useState(true);
-  const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [errorM, setErrorM] = useState('');
 
   const onChange = (event) => {
     const {
@@ -24,14 +24,12 @@ const LogIn = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (ourUer) {
-        let data;
-        data = await signInWithEmailAndPassword(authService, email, password);
-        console.log('로그인 됨!');
+      if (isLoggedIn === false) {
+        await signInWithEmailAndPassword(authService, email, password);
       }
     } catch (error) {
-      setOurUser(false);
-      setError(error.message);
+      setIsLoggedIn(false);
+      setErrorM(error.message);
     }
   };
   return (
@@ -39,8 +37,8 @@ const LogIn = () => {
       <form onSubmit={onSubmit}>
         <input name='email' type='email' placeholder='Email' value={email} onChange={onChange} required />
         <input name='password' type='password' placeholder='Password' value={password} onChange={onChange} required />
-        <input type='submit' value={ourUer ? 'Log In' : '회원가입을 해주세요'} />
-        <span>{error}</span>
+        <input type='submit' value='Log In' />
+        <span>{errorM}</span>
       </form>
       <GoogleLogIn />
     </>
