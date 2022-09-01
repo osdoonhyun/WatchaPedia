@@ -12,22 +12,41 @@ function Header() {
   const Navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [userObj, setUserobj] = useState(null);
-
+  
   useEffect(() => {
     // useEffect가 없으면 3번 렌더링 됨.
     //로그인 상태에 변화가 생겼다면
     onAuthStateChanged(authService, (user) => {
       if (user) {
         //여기서 user에 유저 정보가 담기고 user.uid로 유저를 특정할 수가 있음
-        setLoggedIn(true);
+        setLoggedIn((loggedIn) => !loggedIn);
         setUserobj(user);
+        console.log('user:', user);
+        
       }
     });
   }, []);
-
+ 
   const onLoginClick = () => {
-    Navigate('./Login');
+    if(loggedIn){ 
+      Navigate('./Login');
+    } else {
+      Navigate('./profile');
+    }
   };
+
+  const onSignUpClick = () => {
+    if(!loggedIn){ 
+      Navigate('./SignUp');
+    } else {
+      Navigate('./profile');
+    }
+  };
+
+
+
+  console.log('loggedIn', loggedIn);
+  console.log('userObj', userObj);
 
   return (
     <>
@@ -52,7 +71,7 @@ function Header() {
           </div>
           {/* TODO: navigate 사용해서 페이지 이동 */}
           <button onClick={onLoginClick}>{loggedIn ? '평가하기' : 'Login'}</button>
-          <button onClick={() => Navigate('/signUp')}>{loggedIn ? '프로필' : 'SignUp'}</button>
+          <button onClick={onSignUpClick}>{loggedIn ? '프로필' :  'SignUp'}</button>
           {/* <button onClick={()=>Navigate('/SignUp')}>{loggedIn ? "SignUp" : <AccountIcon className="header_accountIcon"/>}</button> */}
         </div>
       </div>

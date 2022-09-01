@@ -30,7 +30,10 @@ function Profile() {
       <Header/>
       <div className='profile'>
         <div className='profile_img'>
-          <img src={user.photoURL} alt='Profile Image'/>
+          <img 
+            src={user.photoURL} 
+            alt='프로필 이미지'
+          />
         </div>
         <div className='profile_name'>
           {user.displayName}

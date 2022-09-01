@@ -8,7 +8,7 @@ import SignUp from './signUp';
 import MovieDetail from './movieDetail';  
 import Profile from './profile';
 import ProfileEdit from './profileEdit';
-import ProfileComment from './profileCommentsx';
+import ProfileComment from './profileComment';
 import ProfileEvaluation from './profileEvaluation';
 import ProfileCollection from './profileCollection';
 

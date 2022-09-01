@@ -17,7 +17,7 @@ function SearchMovie({title, openDt}) {
   useEffect(()=>{
     getMoviesImg();
   },[]);
-  console.log('무비 이미지: ',moviesImg);
+  //console.log('무비 이미지: ',moviesImg);
 
   //동일한 title에 맞는 영화 정보를 moviesImgList에 가공하여 저장 헌트 쳤을때 헌트가 여러개 불러온거
   const moviesImgList = moviesImg.map((moviesImg) => {
@@ -55,11 +55,11 @@ function SearchMovie({title, openDt}) {
     const movieInfo = event.target.dataset.clicked_movie_info;
     Navigate('/MovieDetail', { state: movieInfo });
   }
-  console.log('moviesInfo:',moviesInfo);
+  // console.log('moviesInfo:',moviesInfo);
 
-  console.log('prodYear:',moviesInfo.prodYear);
-  console.log('titles:',moviesInfo.title);
-  console.log(moviesInfo);
+  // console.log('prodYear:',moviesInfo.prodYear);
+  // console.log('titles:',moviesInfo.title);
+  // console.log(moviesInfo);
   return (
     <div onClick={onClick} className="moviesImg">
       <img 
