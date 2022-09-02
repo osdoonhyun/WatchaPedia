@@ -16,7 +16,8 @@ const SearchResult = () => {
   const onClick = (event) => {
     //넘긴 데이터를 받아옴
     const movieInfo = event.target.dataset.clicked_movie_info;
-    Navigate('/MovieDetail', { state: movieInfo });
+    const movieInfoObj = JSON.parse(movieInfo); //string을객체로 바꿔서 movieSeq Id 값으로 넘겨줌
+    Navigate(`/MovieDetail/${movieInfoObj.movieSeq}`, { state: movieInfo });
   };
 
   return (

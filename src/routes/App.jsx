@@ -29,7 +29,8 @@ function App() {
           <Route path='/Login' element={<Login />} />
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/SearchResult' element={<SearchResult />} />
-          <Route path='/MovieDetail' element={<MovieDetail />} />
+          {/* <Route path='/MovieDetail' element={<MovieDetail />} /> */}
+          <Route path='/MovieDetail/:movieSeq' element={<MovieDetail />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/profileEdit' element={<ProfileEdit />} />
           <Route path='/ProfileEvaluation' element={<ProfileEvaluation />} />
