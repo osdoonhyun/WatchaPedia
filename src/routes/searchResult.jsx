@@ -1,23 +1,15 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-//코드 설명
-//1. searchedMovies = useLocation().state는 {state} = useLocation() 과 같으나
-//따로 이름을 설정하기 위해 사용
-//2. data-이름 속성으로 태그에 데이터를 저장할 수 있음
-//3. event.target.dataset.이름 으로 데이터를 가져올 수 있음
-//4. 객체는 출력하려면 JSON.stringify()로 문자열 변환이 필요
-//5. 문자열로 변환한 객체를 다시 객체로 사용하기 위해서는
-//JSON.parse()를 이용하여 객체로 변환이 가능하다.
 const SearchResult = () => {
   const searchedMovies = useLocation().state;
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onClick = (event) => {
     //넘긴 데이터를 받아옴
     const movieInfo = event.target.dataset.clicked_movie_info;
     const movieInfoObj = JSON.parse(movieInfo); //string을객체로 바꿔서 movieSeq Id 값으로 넘겨줌
-    Navigate(`/MovieDetail/${movieInfoObj.movieSeq}`, { state: movieInfo });
+    navigate(`/MovieDetail/${movieInfoObj.movieSeq}`, { state: movieInfo });
   };
 
   return (

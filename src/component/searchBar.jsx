@@ -1,17 +1,17 @@
-//TODO: 일단 검색창에서 영화제목을 검색하면 관련 영화를 표시하도록 만들기
-
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 //KMBD 인증키 ServiceKey= 777KP7DH9KI1K831H458
 //KMDB 기본요청 URL = https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2
 
 const SearchBar = () => {
   const [title, setTitle] = useState('');
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onGetMoviesInfoList = async (event) => {
     event.preventDefault();
+
     const json = await (
       await fetch(
         `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=777KP7DH9KI1K831H458&title=${title}&detail=Y`
@@ -42,9 +42,12 @@ const SearchBar = () => {
         prodYear: x.prodYear,
         nation: x.nation,
         genre: x.genre,
+        repRlsDate: x.repRlsDate,
       };
     });
-    Navigate('./SearchResult', { state: moviesInfoList });
+
+    navigate('/SearchResult', { state: moviesInfoList });
+    setTitle('');
   };
 
   const onChange = (event) => {

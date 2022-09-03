@@ -3,8 +3,7 @@ import { useLocation } from 'react-router-dom';
 const MovieDetail = () => {
   //문자열로 변환한 데이터를 다시 객체로 변환
   const movieInfo = JSON.parse(useLocation().state);
-  
-  console.log('영화인포',movieInfo);
+
   return (
     <>
       <div>

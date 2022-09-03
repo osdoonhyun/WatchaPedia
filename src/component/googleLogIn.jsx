@@ -4,12 +4,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const GoogleLogIn = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSocialClick = async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(authService, provider);
-    Navigate('/');
+    navigate('/');
   };
 
   return (
