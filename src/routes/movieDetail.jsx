@@ -10,7 +10,7 @@ const MovieDetail = () => {
         <img src={movieInfo.stilUrls[0]} alt='스틸 이미지' />
       </div>
       <div>
-        <img src={movieInfo.posterUrls[0]} alt='포스터 이미지' />
+        <img src={movieInfo.posterUrl} alt='포스터 이미지' />
         <span>{movieInfo.title}</span>
         <br />
         <span>

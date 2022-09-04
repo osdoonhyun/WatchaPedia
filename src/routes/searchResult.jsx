@@ -21,7 +21,7 @@ const SearchResult = () => {
             <div onClick={onClick} key={m.movieSeq}>
               <div>
                 {/* 클릭하는 태그에서 객체 데이터를 문자열로 변환한 데이터를 넘김 */}
-                <img src={m.posterUrls[0]} alt='포스터 사진' width='160' height='233' data-clicked_movie_info={JSON.stringify(m)} />
+                <img src={m.posterUrl} alt='포스터 사진' width='160' height='233' data-clicked_movie_info={JSON.stringify(m)} />
               </div>
               <div data-clicked_movie_info={JSON.stringify(m)}>{m.title}</div>
               <div data-clicked_movie_info={JSON.stringify(m)}>

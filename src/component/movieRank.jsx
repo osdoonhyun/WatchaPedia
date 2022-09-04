@@ -21,6 +21,7 @@ function MovieRank() {
   const moviesList = movies.map((movie) => {
     return {
       rnum: movie.rnum,
+      movieCd: movie.movieCd,
       rank: movie.rank,
       openDt: movie.openDt,
       title: movie.movieNm,
@@ -29,15 +30,13 @@ function MovieRank() {
     };
   });
 
-  console.log(moviesList);
-
   return (
     <div className='home'>
       {moviesList.map((movie) => (
         <div key={movie.rnum} className='movie_Container'>
           <div className='movie_Box'>
             <div>{movie.rank}위</div>
-            <SearchMovie title={movie.title} openDt={movie.openDt.split('-').join('')} />
+            <SearchMovie movieCd={movie.movieCd} title={movie.title} openDt={movie.openDt} />
             <div>
               예매율: {movie.salesShare}
               누적관객수: {movie.audiAcc}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function SearchMovie({ title, openDt }) {
+function SearchMovie({ movieCd, title, openDt }) {
   const Navigate = useNavigate();
   const [moviesImg, setMoviesImg] = useState([]);
 
@@ -30,7 +30,6 @@ function SearchMovie({ title, openDt }) {
   useEffect(() => {
     getMoviesImg();
   }, []);
-
   //동일한 title에 맞는 영화 정보를 moviesImgList에 가공하여 저장 헌트 쳤을때 헌트가 여러개 불러온거
   const moviesImgList = moviesImg.map((m) => {
     let rectifyTitle = m.title;
@@ -43,7 +42,7 @@ function SearchMovie({ title, openDt }) {
       titleEng: m.titleEng,
       prodYear: m.prodYear,
       posterUrl: m.posters.split('|')[0],
-      stilUrl: m.stlls.split('|')[0],
+      stilUrls: m.stlls.split('|'),
       movieSeq: m.movieSeq,
       nation: m.nation,
       genre: m.genre,
@@ -51,17 +50,21 @@ function SearchMovie({ title, openDt }) {
       actorAndProd: m.staffs.staff,
       runtime: m.runtime,
       rating: m.rating,
-      plot: m.plots,
+      plot: m.plots.plot[0].plotText,
       repRlsDate: m.repRlsDate,
+      kmdbMovieCode: m.Codes.Code[0].CodeNo,
     };
   });
 
   //특정 영화 정보만 moviesInfo에 저장  헌트 하나만 불러온거
   let moviesInfo = {};
   for (let i = 0; i < moviesImgList.length; i++) {
-    if (moviesImgList[i].repRlsDate === openDt && moviesImgList[i].title === title) {
-      //개봉연도가 아닌 개봉날짜까지 일치로 변경
-      console.log(title, moviesImgList[i].repRlsDate, openDt);
+    //코드가 같거나 (개봉일자와 제목이 둘다 같거나)
+    if (
+      moviesImgList[i].kmdbMovieCode === movieCd ||
+      (moviesImgList[i].repRlsDate === openDt.replaceAll('-', '') &&
+        moviesImgList[i].title.replaceAll(' ', '') === title.replaceAll(' ', ''))
+    ) {
       moviesInfo = moviesImgList[i];
       break;
     }
@@ -69,7 +72,7 @@ function SearchMovie({ title, openDt }) {
 
   const onClick = (event) => {
     const movieInfo = event.target.dataset.clicked_movie_info;
-    const movieInfoObj = JSON.parse(movieInfo); //string을 객체로 바꿔서 movieSeq를 Id 값으로 넘겨줌
+    const movieInfoObj = JSON.parse(movieInfo);
     Navigate(`/MovieDetail/${movieInfoObj.movieSeq}`, { state: movieInfo });
   };
 

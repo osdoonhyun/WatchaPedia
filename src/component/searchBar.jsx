@@ -37,7 +37,7 @@ const SearchBar = () => {
         rating: x.rating,
         plot: x.plots.plot[0].plotText,
         vods: x.vods.vod,
-        posterUrls: x.posters.split('|'),
+        posterUrl: x.posters.split('|')[0],
         stilUrls: x.stlls.split('|'),
         prodYear: x.prodYear,
         nation: x.nation,
