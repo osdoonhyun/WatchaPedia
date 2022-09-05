@@ -16,7 +16,8 @@ function MovieRank() {
       setMovies(json['boxOfficeResult']['dailyBoxOfficeList']);
     };
     getMovies();
-  }, [movies]);
+    console.count();
+  }, []);
 
   //toFixed() : 괄호 안에 숫자가 소수점 자릿수를 나타냄
   const moviesList = movies.map((movie) => {
