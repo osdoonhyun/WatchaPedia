@@ -5,17 +5,18 @@ function MovieRank() {
   const [movies, setMovies] = useState([]);
 
   //영진위 영화정보 가져오기
-  const getMovies = async () => {
-    const json = await (
-      await fetch(
-        `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=9674dd7ff57f3049d68c7349e58025ba&targetDt=20220827&itemPerPage=10`
-      )
-    ).json();
-    setMovies(json['boxOfficeResult']['dailyBoxOfficeList']);
-  };
+
   useEffect(() => {
+    const getMovies = async () => {
+      const json = await (
+        await fetch(
+          `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=9674dd7ff57f3049d68c7349e58025ba&targetDt=20220827&itemPerPage=10`
+        )
+      ).json();
+      setMovies(json['boxOfficeResult']['dailyBoxOfficeList']);
+    };
     getMovies();
-  }, []);
+  }, [movies]);
 
   //toFixed() : 괄호 안에 숫자가 소수점 자릿수를 나타냄
   const moviesList = movies.map((movie) => {
