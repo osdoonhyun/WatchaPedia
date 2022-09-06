@@ -29,8 +29,14 @@ const MovieDetail = ({ isLoggedIn, userObj }) => {
       </div>
       {movieInfo.actorAndProd.map((staffs, index) => (
         <div key={index}>
-          <div>{staffs.staffNm}</div>
-          <div>{staffs.staffRole ? `${staffs.staffRoleGroup} | ${staffs.staffRole} ` : staffs.staffRoleGroup}</div>
+          {staffs.staffRoleGroup === '감독' || staffs.staffRoleGroup === '출연' ? (
+            <>
+              <div>{staffs.staffNm}</div>
+              <div>{staffs.staffRole ? `${staffs.staffRoleGroup} | ${staffs.staffRole} ` : staffs.staffRoleGroup}</div>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       ))}
     </>
