@@ -22,8 +22,8 @@ function SearchMovie({title, openDt}) {
     const json2 = await (
       await fetch(`https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=777KP7DH9KI1K831H458&title=${title}&detail=Y`
       )
-    ).json();
-    setMoviesImg(json2.Data[0].Result);
+      ).json();
+      setMoviesImg(json2.Data[0].Result);
   }
   // useEffect(()=>{
   //   getMoviesImg();
