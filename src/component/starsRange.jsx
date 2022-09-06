@@ -2,30 +2,35 @@ import React, { useState } from 'react';
 import { dbService } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-const StarsRange = () => {
+const StarsRange = ({ isLoggedIn, userObj }) => {
   const [starRange, setStarRange] = useState(0);
+  const [isEstiamte, setIsEstimate] = useState('NO'); //평가가 되었는지 아닌지 검사
 
   const onChange = (event) => {
     //레인지를 마우스로 잡고 조정중일때(아직 떼기 전이므로 클릭 전)
     const v = event.target.value;
-    console.log(v);
     setStarRange(v);
   };
 
   const onClick = async () => {
     //클릭(눌렀다가 떼는 순간)이 이루어지면 BD로 넘어감
-    const ref = await addDoc(collection(dbService, 'starRangeInDB'), {
-      ratedStar: starRange,
-      createdAt: serverTimestamp(),
-      // creatorId: userObj.uid,
-    });
-    console.log(ref);
+    // if (userObj === null) {
+    //   return <div>로그인이 필요한 시스템입니다.</div>;
+    // } else
+    if (userObj !== null && starRange > 0) {
+      setIsEstimate((isEstiamte) => !isEstiamte);
+      await addDoc(collection(dbService, 'starRangeInDB'), {
+        createdAt: serverTimestamp(),
+        creatorId: userObj.uid,
+        ratedStar: starRange,
+      });
+    }
   };
 
   return (
     <>
       <input type='range' min='0' max='5' step='0.5' defaultValue='0' onChange={onChange} onClick={onClick} />
-      <div>{starRange}</div>
+      <div>{starRange > 0 ? (userObj === null ? '로그인이 필요한 시스템입니다.' : starRange + '점') : '아직 평가되지 않았습니다.'}</div>
     </>
   );
 };

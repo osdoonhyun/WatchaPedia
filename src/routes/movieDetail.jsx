@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import StarsRange from '../component/starsRange';
 
 const MovieDetail = ({ isLoggedIn, userObj }) => {
   //문자열로 변환한 데이터를 다시 객체로 변환
@@ -18,6 +19,10 @@ const MovieDetail = ({ isLoggedIn, userObj }) => {
         </span>
         <br />
       </div>
+      <div>
+        <StarsRange isLoggedIn={isLoggedIn} userObj={userObj} />
+      </div>
+      <br />
       <div>
         <div>기본정보</div>
         <div>
