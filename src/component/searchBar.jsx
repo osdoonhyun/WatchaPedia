@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //KMBD 인증키 ServiceKey= 777KP7DH9KI1K831H458
 //KMDB 기본요청 URL = https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2
@@ -32,13 +31,13 @@ const SearchBar = () => {
         movieSeq: x.movieSeq,
         title: rectifyTitle,
         titleEng: x.titleEng,
-        actorAndProd: x.staffs.staff,
         runtime: x.runtime,
         rating: x.rating,
         plot: x.plots.plot[0].plotText,
         vods: x.vods.vod,
         posterUrl: x.posters.split('|')[0],
         stilUrls: x.stlls.split('|'),
+        actorAndProd: x.staffs.staff,
         prodYear: x.prodYear,
         nation: x.nation,
         genre: x.genre,
