@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 //KMBD 인증키 ServiceKey= 777KP7DH9KI1K831H458
 //KMDB 기본요청 URL = https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2
