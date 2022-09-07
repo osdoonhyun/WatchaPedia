@@ -23,14 +23,14 @@ const StarsRange = ({ isLoggedIn, userObj, movieSeq }) => {
         //평가가 0점보다 크고 아직 평가가 없다면 새로 별점 DB 생성
         console.log('if 들어옴');
         setIsEstimate((isEstimate) => !isEstimate);
-        await setDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${movieSeq}`), {
+        await setDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${userObj.uid}`), {
           createdAt: serverTimestamp(),
           creatorId: userObj.uid,
           ratedStar: starRange,
         });
       } else if (isEstimate === true && starRange > 0) {
-        //평가가 0점 보다 크지만 이미 평가 내용이 있다면 => 평가데이터 업데이트.
-        await updateDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${movieSeq}`), {
+        //평가가 0점 보다 크지만 이미 평가 내용이 있다면 => 평가 데이터 업데이트.
+        await updateDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${userObj.uid}`), {
           createdAt: serverTimestamp(),
           creatorId: userObj.uid,
           ratedStar: starRange,
@@ -38,7 +38,7 @@ const StarsRange = ({ isLoggedIn, userObj, movieSeq }) => {
       } else if (isEstimate === true && starRange === 0) {
         //평가가 0점이지만 이미 평가 내용이 있다면 => 평가 데이터 삭제.
         setIsEstimate((isEstimate) => !isEstimate);
-        await deleteDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${movieSeq}`));
+        await deleteDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${userObj.uid}`));
       }
     }
   };

@@ -37,7 +37,9 @@ const MovieDetail = ({ isLoggedIn, userObj }) => {
           {staffs.staffRoleGroup === '감독' || staffs.staffRoleGroup === '출연' ? (
             <>
               <div>{staffs.staffNm}</div>
-              <div>{staffs.staffRole ? `${staffs.staffRoleGroup} | ${staffs.staffRole} ` : staffs.staffRoleGroup}</div>
+              <div>
+                {staffs.staffRole ? `${staffs.staffRoleGroup} | ${staffs.staffRole} ` : `${staffs.staffRoleGroup} | ${staffs.staffEtc} `}
+              </div>
             </>
           ) : (
             <></>
