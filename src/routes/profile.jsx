@@ -1,66 +1,74 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Header from '../component/Header';
-import { getAuth } from "firebase/auth";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { authService } from "../firebase";
+import { signOut } from "firebase/auth";
 
-function Profile() {
+function Profile({ isLoggedIn, userObj }) {
   const Navigate = useNavigate();
-  const auth = getAuth();
-  const user = auth.currentUser;
-  console.log(user); 
-  console.log(user.displayName); //이름
-  console.log(user.photoURL); //photo
-
-  
+  const [error, setError] = useState("");
   const onProfileEditClick = () => {
-    Navigate('/ProfileEdit');
+    Navigate("/ProfileEdit");
   };
   const onEvaluationClick = () => {
-    Navigate('/ProfileEvaluation');
+    Navigate("/ProfileEvaluation");
   };
   const onCommentClick = () => {
-    Navigate('/ProfileComment');
+    Navigate("/ProfileComment");
   };
   const onCollectionClick = () => {
-    Navigate('/ProfileCollection');
+    Navigate("/ProfileCollection");
   };
 
-  return(
-    <div className='profilePage'>
-      <Header/>
-      <div className='profile'>
-        <div className='profile_img'>
-          <img 
-            src={user.photoURL} 
-            alt='프로필 이미지'
-          />
+  const onLogoutClick = async () => {
+    try {
+      await signOut(authService);
+      // onAuthStateChanged(authService, (user) => {
+      //   if (!user) {
+      //     console.log("userObj", user);
+      //     console.log("isLoggedIn", isLoggedIn);
+      //   }
+      // });
+      Navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  return (
+    <div className="profilePage">
+      <div className="profile">
+        <>
+          {userObj ? (
+            <div>
+              <div className="profile_img">
+                <img
+                  src={userObj ? userObj.photoURL : "로딩중"}
+                  alt="프로필 이미지"
+                />
+              </div>
+              <div className="profile_name">{userObj.displayName}</div>
+            </div>
+          ) : (
+            <></>
+          )}
+        </>
+
+        <button onClick={onProfileEditClick} className="profile_edit">
+          프로필 수정
+        </button>
+        <button onClick={onLogoutClick}>로그아웃</button>
+        <span>{error}</span>
+        <div onClick={onEvaluationClick} className="profile_evaluation">
+          평가
         </div>
-        <div className='profile_name'>
-          {user.displayName}
-        </div>
-        <button onClick={onProfileEditClick} className='profile_edit'>프로필 수정</button>
-        <div onClick={onEvaluationClick} 
-          className='profile_evaluation'
-        >
-          평가 
-        </div>
-        <div 
-          onClick={onCommentClick}
-          className='profile_comment'
-        >
+        <div onClick={onCommentClick} className="profile_comment">
           코멘트
         </div>
-        <div 
-          onClick={onCollectionClick}
-          className='profile_collection'
-        >
+        <div onClick={onCollectionClick} className="profile_collection">
           컬렉션
         </div>
       </div>
-      <div className='profile_preference_analysis'
-        >
-        취향분석
-      </div>
+      <div className="profile_preference_analysis">취향분석</div>
       {/* <div className='profile_storage'>
         <p>보관함</p>
         <div 
@@ -84,7 +92,10 @@ function Profile() {
         </div> }
       </div> */}
     </div>
-  )
+  );
 }
 
 export default Profile;
+
+// signOut 메서드 사용하여 로그아웃 후 Navigate로 홈으로 이동
+// userObj props로 늦게 넘어오면서 null값을 받아와 에러가 나는데, 삼항연산자 사용하여 해결
