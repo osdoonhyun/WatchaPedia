@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
+import StarsRange from '../component/starsRange';
 
-const MovieDetail = () => {
+const MovieDetail = ({ isLoggedIn, userObj }) => {
   //문자열로 변환한 데이터를 다시 객체로 변환
   const movieInfo = JSON.parse(useLocation().state);
 
@@ -17,8 +18,11 @@ const MovieDetail = () => {
           {movieInfo.prodYear} · {movieInfo.genre} · {movieInfo.nation}
         </span>
         <br />
-        <span>별점</span>
       </div>
+      <div>
+        <StarsRange isLoggedIn={isLoggedIn} userObj={userObj} movieSeq={movieInfo.movieSeq} />
+      </div>
+      <br />
       <div>
         <div>기본정보</div>
         <div>
@@ -28,16 +32,23 @@ const MovieDetail = () => {
         </div>
         <p>{movieInfo.plot}</p>
       </div>
-      <div>{JSON.stringify(movieInfo.actorAndProd)}</div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      {movieInfo.actorAndProd.map((staffs, index) => (
+        <div key={index}>
+          {staffs.staffRoleGroup === '감독' || staffs.staffRoleGroup === '출연' ? (
+            <>
+              <div>{staffs.staffNm}</div>
+              <div>
+                {staffs.staffRole ? `${staffs.staffRoleGroup} | ${staffs.staffRole} ` : `${staffs.staffRoleGroup} | ${staffs.staffEtc} `}
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+      ))}
     </>
   );
 };
 
 export default MovieDetail;
+//동명이인, 다중역할의 경우 키값이 겹치기 때문에 인덱스로 줬음
