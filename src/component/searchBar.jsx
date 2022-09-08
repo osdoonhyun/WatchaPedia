@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
-//KMBD ?�증?? ServiceKey= 777KP7DH9KI1K831H458
-//KMDB 기본?�청 URL = https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2
+//KMBD 인증키 ServiceKey= 777KP7DH9KI1K831H458
+//KMDB 기본요청 URL = https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2
 
 const SearchBar = () => {
   const [title, setTitle] = useState('');
@@ -26,7 +25,7 @@ const SearchBar = () => {
       rectifyTitle = rectifyTitle.replace(/!HE/g, '');
       rectifyTitle = rectifyTitle.replace(/^\s+|\s+$/g, '');
       rectifyTitle = rectifyTitle.replace(/ +/g, ' ');
-      //g : ?�역?�서
+      //g : 전역에서
 
       return {
         movieSeq: x.movieSeq,
@@ -58,7 +57,7 @@ const SearchBar = () => {
   return (
     <>
       <form onSubmit={onGetMoviesInfoList}>
-        <input type='text' placeholder='?�목?? ?�력?�세??' value={title} onChange={onChange} />
+        <input type='text' placeholder='제목을 입력하세요' value={title} onChange={onChange} />
       </form>
     </>
   );
@@ -66,10 +65,10 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-/* 버튼 ?�그?? 기본?�으�? ?�?�이 submit?�라 onClick ?�성?? 줘도 onSubmit ?�성?�로 ?�동?�다.
-onSubmit?? 주면 event.preventDefault();?? ?�다?�더?�고 ?�로고침?? ?�어버리??
-버튼 ?�그?? 반드?? onClick?? ?�용?�고 event.preventDefault();�? ?�로고침?? 막도�? ?�다.
-?�의 차이
-onClick?� ?�터�? 못들?��??? ?�?? ?�로고침?? 기본?? ?�니�?,
-onSubmit?� ?�터�? ?�어�? ?? ?�는 ?�?? ?�로고침?? 기본?�라??
-event.preventDefault(); �? ?�용?�서 기본 ?�작?? 막아주어?? ?�다.*/
+/* 버튼 태그는 기본적으로 타입이 submit이라 onClick 속성을 줘도 onSubmit 속성으로 작동한다.
+onSubmit을 주면 event.preventDefault();이 있다하더라고 새로고침이 되어버리니
+버튼 태그는 반드시 onClick을 사용하고 event.preventDefault();로 새로고침을 막도록 한다.
+둘의 차이
+onClick은 엔터로 못들어가는 대신 새로고침이 기본이 아니며,
+onSubmit은 엔터로 들어갈 수 있는 대신 새로고침이 기본이라서
+event.preventDefault(); 를 사용해서 기본 동작을 막아주어야 한다.*/

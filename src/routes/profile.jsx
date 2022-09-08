@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { authService } from "../firebase";
-import { signOut } from "firebase/auth";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { authService } from '../firebase';
+import { signOut } from 'firebase/auth';
 
 function Profile({ isLoggedIn, userObj }) {
   const Navigate = useNavigate();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const onProfileEditClick = () => {
-    Navigate("/ProfileEdit");
+    Navigate('/ProfileEdit');
   };
   const onEvaluationClick = () => {
-    Navigate("/ProfileEvaluation");
+    Navigate('/ProfileEvaluation');
   };
   const onCommentClick = () => {
-    Navigate("/ProfileComment");
+    Navigate('/ProfileComment');
   };
   const onCollectionClick = () => {
-    Navigate("/ProfileCollection");
+    Navigate('/ProfileCollection');
   };
 
   const onLogoutClick = async () => {
@@ -28,47 +28,44 @@ function Profile({ isLoggedIn, userObj }) {
       //     console.log("isLoggedIn", isLoggedIn);
       //   }
       // });
-      Navigate("/");
+      Navigate('/');
     } catch (error) {
       setError(error.message);
     }
   };
 
   return (
-    <div className="profilePage">
-      <div className="profile">
+    <div className='profilePage'>
+      <div className='profile'>
         <>
           {userObj ? (
             <div>
-              <div className="profile_img">
-                <img
-                  src={userObj ? userObj.photoURL : "로딩중"}
-                  alt="프로필 이미지"
-                />
+              <div className='profile_img'>
+                <img src={userObj ? userObj.photoURL : '로딩중'} alt='프로필 이미지' />
               </div>
-              <div className="profile_name">{userObj.displayName}</div>
+              <div className='profile_name'>{userObj.displayName}</div>
             </div>
           ) : (
             <></>
           )}
         </>
 
-        <button onClick={onProfileEditClick} className="profile_edit">
+        <button onClick={onProfileEditClick} className='profile_edit'>
           프로필 수정
         </button>
         <button onClick={onLogoutClick}>로그아웃</button>
         <span>{error}</span>
-        <div onClick={onEvaluationClick} className="profile_evaluation">
+        <div onClick={onEvaluationClick} className='profile_evaluation'>
           평가
         </div>
-        <div onClick={onCommentClick} className="profile_comment">
+        <div onClick={onCommentClick} className='profile_comment'>
           코멘트
         </div>
-        <div onClick={onCollectionClick} className="profile_collection">
+        <div onClick={onCollectionClick} className='profile_collection'>
           컬렉션
         </div>
       </div>
-      <div className="profile_preference_analysis">취향분석</div>
+      <div className='profile_preference_analysis'>취향분석</div>
       {/* <div className='profile_storage'>
         <p>보관함</p>
         <div 
