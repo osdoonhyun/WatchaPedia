@@ -20,7 +20,7 @@ const MovieDetail = ({ isLoggedIn, userObj }) => {
         <br />
       </div>
       <div>
-        <StarsRange isLoggedIn={isLoggedIn} userObj={userObj} movieSeq={movieInfo.movieSeq} />
+        <StarsRange isLoggedIn={isLoggedIn} userObj={userObj} movieSeq={movieInfo.movieSeq} title={movieInfo.title} />
       </div>
       <br />
       <div>
