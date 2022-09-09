@@ -87,7 +87,7 @@ const StarsRange = ({ isLoggedIn, userObj, movieSeq, title }) => {
       {isEstimate === true ? ( //별점 평가되었다면
         commentToggle === false ? ( //별점 평가는 되었지만 코멘트를 작성하지 않았다면
           <div>
-            <span>이 작품에 대한 님의 생각을 남겨주세요!</span>
+            <span>이 작품에 대한 {userObj.displayName}님의 생각을 남겨주세요!</span>
             <button onClick={onClickCommentToggle}>코멘트 남기기</button>
           </div>
         ) : (
