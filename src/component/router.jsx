@@ -18,6 +18,7 @@ import ProfileComment from '../routes/profileComment';
 import ProfileEvaluation from '../routes/profileEvaluation';
 import ProfileCollection from '../routes/profileCollection';
 import NotFound from '../routes/NotFound';
+import CommentCollection from '../routes/commentCollection';
 
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -124,6 +125,15 @@ function AppRouter() {
               <>
                 <Header isLoggedIn={isLoggedIn} userObj={userObj} />
                 <ProfileCollection isLoggedIn={isLoggedIn} userObj={userObj} />
+              </>
+            }
+          />
+          <Route
+            path='/CommentCollection'
+            element={
+              <>
+                <Header isLoggedIn={isLoggedIn} userObj={userObj} />
+                <CommentCollection userObj={userObj} />
               </>
             }
           />

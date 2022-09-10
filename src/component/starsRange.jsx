@@ -1,15 +1,34 @@
 import React, { useState } from 'react';
 import { dbService } from '../firebase';
 import { setDoc, serverTimestamp, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { useEffect } from 'react';
 //setDoc은 내가 지정한 이름으로 DB 문서 이름을 주기 위해서 사용한다.
 //addDoc과의 차이점은 addDoc은 collection을, setDoc은 doc을 사용한다.
 
-const StarsRange = ({ isLoggedIn, userObj, movieSeq, title }) => {
+const StarsRange = ({ isLoggedIn, userObj, movieInfo }) => {
   const [starRange, setStarRange] = useState(0); //별점
   const [commentText, setCommentText] = useState(''); //코멘트 작성 내용
   const [isEstimate, setIsEstimate] = useState(false); //별점 평가가 되었는가?(별점 수정 시에 필요)
   const [commentToggle, setCommentToggle] = useState(false); //코멘트를 작성할 것인가?
   const [isSaved, setIsSaved] = useState(false); //코멘트 작성 후 저장하기 버튼을 눌렀는가?
+  const [movieDBobj, setMovieDBobj] = useState({});
+
+  useEffect(() => {
+    //오류를 없애기 위해 파이어베이스에 색인을 모두 만들어주어야 한다.
+    if (userObj !== null) {
+      setMovieDBobj({
+        createdAt: serverTimestamp(),
+        creatorId: userObj.uid,
+        ratedStar: starRange,
+        commentText, //단축 속성명 사용
+        title: movieInfo.title,
+        prodYear: movieInfo.prodYear,
+        posterUrl: movieInfo.posterUrl,
+        movieSeq: movieInfo.movieSeq,
+      });
+    }
+    console.log('로딩중');
+  }, [commentText]);
 
   const onChangeStar = (event) => {
     //레인지를 마우스로 잡고 조정중일때(아직 떼기 전이므로 클릭 전)
@@ -24,24 +43,14 @@ const StarsRange = ({ isLoggedIn, userObj, movieSeq, title }) => {
       if (isEstimate === false && starRange > 0) {
         //평가가 0점보다 크고 아직 평가가 없다면 새로 별점 DB 생성
         setIsEstimate((isEstimate) => !isEstimate);
-        await setDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${userObj.uid}`), {
-          createdAt: serverTimestamp(),
-          creatorId: userObj.uid,
-          ratedStar: starRange,
-          commentText, //단축 속성명 사용
-        });
+        await setDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieInfo.movieSeq}USERUID${userObj.uid}`), movieDBobj);
       } else if (isEstimate === true && starRange > 0) {
         //평가가 0점 보다 크지만 이미 평가 내용이 있다면 => 평가 데이터 업데이트.
-        await updateDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${userObj.uid}`), {
-          createdAt: serverTimestamp(),
-          creatorId: userObj.uid,
-          ratedStar: starRange,
-          commentText,
-        });
+        await updateDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieInfo.movieSeq}USERUID${userObj.uid}`), movieDBobj);
       } else if (isEstimate === true && starRange === 0) {
         //평가가 0점이지만 이미 평가 내용이 있다면 => 평가 데이터 삭제.
         setIsEstimate((isEstimate) => !isEstimate);
-        await deleteDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${userObj.uid}`));
+        await deleteDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieInfo.movieSeq}USERUID${userObj.uid}`));
       }
     }
   };
@@ -52,22 +61,21 @@ const StarsRange = ({ isLoggedIn, userObj, movieSeq, title }) => {
   };
 
   const onClickUpdateComment = async () => {
-    await updateDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${userObj.uid}`), {
-      createdAt: serverTimestamp(),
-      creatorId: userObj.uid,
-      ratedStar: starRange,
-      commentText,
-    });
+    await updateDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieInfo.movieSeq}USERUID${userObj.uid}`), movieDBobj);
     setIsSaved(true);
   };
 
   const onClickDeleteComment = async () => {
     setCommentText('');
-    await updateDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieSeq}USERUID${userObj.uid}`), {
+    await updateDoc(doc(dbService, `starRangeInDB`, `MOVIE${movieInfo.movieSeq}USERUID${userObj.uid}`), {
       createdAt: serverTimestamp(),
       creatorId: userObj.uid,
+      commentText: '', //초기화 해야하기 때문에 빈값을 넣어준다. set함수와 동시에 적용이 안되는 것으로 보임
       ratedStar: starRange,
-      commentText: '',
+      title: movieInfo.title,
+      prodYear: movieInfo.prodYear,
+      posterUrl: movieInfo.posterUrl,
+      movieSeq: movieInfo.movieSeq,
     });
     setCommentToggle(false);
     setIsSaved(false);
@@ -93,7 +101,7 @@ const StarsRange = ({ isLoggedIn, userObj, movieSeq, title }) => {
         ) : (
           //별점 평가를 남긴 후, 코멘트 남기기 버튼을 눌렀다면
           <div>
-            <div>{title}</div>
+            <div>{movieInfo.title}</div>
             <textarea
               type='text'
               maxLength={10000}
