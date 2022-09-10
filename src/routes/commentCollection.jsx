@@ -22,6 +22,24 @@ function CommentCollection({ userObj }) {
     console.log('로딩중');
   }, [userObj]);
   console.log(myComments);
+
+  return (
+    <>
+      {myComments.map((cmt, index) => (
+        <div key={index}>
+          <img src={cmt.profileImg} alt='프로필 이미지' />
+          <span>{cmt.userName}</span>
+          <span> 별 {cmt.ratedStar}점</span>
+          <div>
+            <img src={cmt.posterUrl} alt='포스터 이미지' />
+            <span>{cmt.title}</span>
+            <span>{cmt.prodYear}</span>
+            <div>{cmt.commentText}</div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
 }
 
 export default CommentCollection;

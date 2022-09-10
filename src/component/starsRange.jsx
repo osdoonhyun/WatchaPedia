@@ -15,11 +15,14 @@ const StarsRange = ({ isLoggedIn, userObj, movieInfo }) => {
 
   useEffect(() => {
     //오류를 없애기 위해 파이어베이스에 색인을 모두 만들어주어야 한다.
+    //바뀔 가능성이 있는 것들 모두 의존성배열에 넣는다.->실행은 상관없는데 주의 메시지가 뜸
     if (userObj !== null) {
       setMovieDBobj({
         createdAt: serverTimestamp(),
         creatorId: userObj.uid,
         ratedStar: starRange,
+        userName: userObj.displayName,
+        profileImg: userObj.photoURL,
         commentText, //단축 속성명 사용
         title: movieInfo.title,
         prodYear: movieInfo.prodYear,
@@ -28,7 +31,7 @@ const StarsRange = ({ isLoggedIn, userObj, movieInfo }) => {
       });
     }
     console.log('로딩중');
-  }, [commentText]);
+  }, [userObj, starRange, movieInfo.title, movieInfo.prodYear, movieInfo.posterUrl, movieInfo.movieSeq, commentText]);
 
   const onChangeStar = (event) => {
     //레인지를 마우스로 잡고 조정중일때(아직 떼기 전이므로 클릭 전)
