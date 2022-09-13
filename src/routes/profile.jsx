@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../firebase";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 
 function Profile({ isLoggedIn, userObj }) {
   const Navigate = useNavigate();
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const onProfileEditClick = () => {
     Navigate("/ProfileEdit");
   };
@@ -22,15 +22,16 @@ function Profile({ isLoggedIn, userObj }) {
   const onLogoutClick = async () => {
     try {
       await signOut(authService);
-      // onAuthStateChanged(authService, (user) => {
-      //   if (!user) {
-      //     console.log("userObj", user);
-      //     console.log("isLoggedIn", isLoggedIn);
-      //   }
-      // });
+      onAuthStateChanged(authService, (user) => {
+        if (!user) {
+          console.log("userObj", user);
+          console.log("isLoggedIn", isLoggedIn);
+        }
+      });
       Navigate("/");
     } catch (error) {
-      setError(error.message);
+      console.log(error);
+      // setError(error.message);
     }
   };
 
@@ -57,7 +58,7 @@ function Profile({ isLoggedIn, userObj }) {
           프로필 수정
         </button>
         <button onClick={onLogoutClick}>로그아웃</button>
-        <span>{error}</span>
+
         <div onClick={onEvaluationClick} className="profile_evaluation">
           평가
         </div>

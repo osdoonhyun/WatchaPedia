@@ -17,7 +17,7 @@ function Header({ isLoggedIn, userObj }) {
     navigate("./SignUp");
   };
   const onProfileClick = () => {
-    navigate("./Profile");
+    navigate("/Profile");
   };
   const onEstimateClick = () => {
     navigate("./");
