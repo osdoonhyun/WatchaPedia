@@ -1,0 +1,88 @@
+.upperInfo {
+  /*상단부 스틸이미지, 포스터 및 기본 정보, 별점*/
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.upperInfoPosterTextBox {
+  /*상단부 포스터와 텍스트를 감싸는 박스*/
+  display: flex;
+  flex-direction: row;
+  padding: 0px 15vw 0px;
+}
+
+.upperInfoTextBox {
+  /*상단부 텍스트 정보*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.stilImg {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  height: 55vh;
+}
+
+.posterImg {
+  position: relative;
+  bottom: 40px;
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 40vh;
+}
+
+.upperTitle {
+  font-size: 5vh;
+  font-weight: bold;
+}
+
+.upperInner {
+  /*상단부 큰 제목 밑의 회색 글씨*/
+  font-weight: 500;
+  opacity: 0.5;
+}
+
+.lowerBox {
+  /*하단부 정보 컨테이너를 감싸는 회색영역*/
+  position: absolute;
+  background-color: #f8f8f8;
+}
+
+.basicInfoBox {
+  /*기본 정보, 출연 제작 박스*/
+  border-radius: 1%;
+  border: 2px solid #e6e6e6;
+  margin: 8vh 20vw 10vh;
+  background-color: white;
+  padding: 3vh;
+}
+
+.basicInfoText {
+  /*기본정보 자체 글씨*/
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 2vh;
+}
+
+.basicInfoInnerText {
+  /*기본 정보 내의 글씨*/
+  font-size: 15px;
+  margin-bottom: 3vh;
+}
+
+.basicInfoStaffBox {
+  /*출연/제작 전체를 감싸는 박스*/
+  border-top: 1px solid #e6e6e6;
+  padding-top: 2vh;
+}
+
+.basicInfoStaffs {
+  /*스태프 하나하나*/
+  margin: 1vh 0;
+  border-bottom: 1px solid #e6e6e6;
+}
