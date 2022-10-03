@@ -6,6 +6,7 @@ import watchapedia_logo from "../images/watchapedia_logo.png";
 // import AccountIcon from "@material-ui/icons/AccountCircle"
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./searchBar";
+import "./styles.css";
 
 function Header({ isLoggedIn, userObj }) {
   const navigate = useNavigate();
@@ -50,16 +51,20 @@ function Header({ isLoggedIn, userObj }) {
               />
             </div>
           </div>
-          {isLoggedIn ? (
-            <button onClick={onEstimateClick}>평가하기</button>
-          ) : (
-            <button onClick={onLoginClick}>로그인</button>
-          )}
-          {isLoggedIn ? (
-            <button onClick={onProfileClick}>프로필 사진</button>
-          ) : (
-            <button onClick={onSignUpClick}>회원가입</button>
-          )}
+          <div className="header_login">
+            {isLoggedIn ? (
+              <button onClick={onEstimateClick}>평가하기</button>
+            ) : (
+              <button onClick={onLoginClick}>로그인</button>
+            )}
+          </div>
+          <div className="header_signUp">
+            {isLoggedIn ? (
+              <button onClick={onProfileClick}>프로필 사진</button>
+            ) : (
+              <button onClick={onSignUpClick}>회원가입</button>
+            )}
+          </div>
         </div>
       </div>
     </>
