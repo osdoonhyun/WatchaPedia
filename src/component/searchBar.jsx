@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 //KMBD 인증키 ServiceKey= 777KP7DH9KI1K831H458
 //KMDB 기본요청 URL = https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2
 
 const SearchBar = () => {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const navigate = useNavigate();
 
   const onGetMoviesInfoList = async (event) => {
@@ -21,10 +21,10 @@ const SearchBar = () => {
 
     const moviesInfoList = json.Data[0].Result.map((x) => {
       let rectifyTitle = x.title;
-      rectifyTitle = rectifyTitle.replace(/!HS/g, '');
-      rectifyTitle = rectifyTitle.replace(/!HE/g, '');
-      rectifyTitle = rectifyTitle.replace(/^\s+|\s+$/g, '');
-      rectifyTitle = rectifyTitle.replace(/ +/g, ' ');
+      rectifyTitle = rectifyTitle.replace(/!HS/g, "");
+      rectifyTitle = rectifyTitle.replace(/!HE/g, "");
+      rectifyTitle = rectifyTitle.replace(/^\s+|\s+$/g, "");
+      rectifyTitle = rectifyTitle.replace(/ +/g, " ");
       //g : 전역에서
 
       return {
@@ -36,8 +36,8 @@ const SearchBar = () => {
         rating: x.rating,
         plot: x.plots.plot[0].plotText,
         vods: x.vods.vod,
-        posterUrl: x.posters.split('|')[0],
-        stilUrls: x.stlls.split('|'),
+        posterUrl: x.posters.split("|")[0],
+        stilUrls: x.stlls.split("|"),
         prodYear: x.prodYear,
         nation: x.nation,
         genre: x.genre,
@@ -45,8 +45,8 @@ const SearchBar = () => {
       };
     });
 
-    navigate('/SearchResult', { state: moviesInfoList });
-    setTitle('');
+    navigate("/SearchResult", { state: moviesInfoList });
+    setTitle("");
   };
 
   const onChange = (event) => {
@@ -57,7 +57,14 @@ const SearchBar = () => {
   return (
     <>
       <form onSubmit={onGetMoviesInfoList}>
-        <input type='text' placeholder='제목을 입력하세요' value={title} onChange={onChange} />
+        <input
+          type="text"
+          placeholder="제목을 입력하세요"
+          value={title}
+          onChange={onChange}
+          width={"400"}
+          height="300"
+        />
       </form>
     </>
   );

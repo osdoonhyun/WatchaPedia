@@ -24,6 +24,21 @@ function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserobj] = useState(null);
 
+  // useEffect(() => {
+  //   // useEffect가 없으면 3번 렌더링 됨.
+  //   //로그인 상태에 변화가 생겼다면
+  //   onAuthStateChanged(authService, (user) => {
+  //     if (user) {
+  //       setIsLoggedIn((loggedIn) => !loggedIn);
+  //       //여기서 user에 유저 정보가 담기고 user.uid로 유저를 특정할 수가 있음
+  //       setUserobj(user);
+  //     } else {
+  //       // 로그아웃 상태로 전환
+  //       setIsLoggedIn((loggedIn) => !loggedIn);
+  //       setUserobj(user);
+  //     }
+  //   });
+  // }, []);
   useEffect(() => {
     // useEffect가 없으면 3번 렌더링 됨.
     //로그인 상태에 변화가 생겼다면
